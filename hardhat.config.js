@@ -18,12 +18,25 @@ task('accounts', 'Prints the list of accounts', async (taskArgs, hre) => {
  * @type import('hardhat/config').HardhatUserConfig
  */
 module.exports = {
-  solidity: '0.7.6',
+  solidity: {
+    compilers: [
+      {
+        version: '0.7.6',
+        settings: {
+          evmVersion: 'istanbul',
+          optimizer: {
+            enabled: true,
+            runs: 1000,
+          },
+        },
+      },
+    ],
+  },
   networks: {
     hardhat: {
       forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_APY_KEY}`
-      }
-    }
-  }
+        url: `https://eth-mainnet.alchemyapi.io/v2/${process.env.ALCHEMY_APY_KEY}`,
+      },
+    },
+  },
 }
